@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortis Hospital | Excellence in Healthcare</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <div class="nav-logo" onclick="switchView('home')">
+        <div class="nav-logo-icon"><i class="fa-solid fa-staff-snake"></i></div>
+        <div class="nav-logo-text">
+          <strong id="nav-title">Fortis Hospital</strong>
+          <span>Excellence in Healthcare</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a onclick="switchView('home')">Home</a></li>
+        <li><a onclick="scrollToElement('#departments', 'home')">Specialties</a></li>
+        <li><a onclick="scrollToElement('#testimonials', 'home')">Stories</a></li>
+        <li><a onclick="scrollToElement('#donations', 'home')">Donations</a></li>
+        <li><a onclick="switchView('about')">About Us</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <a href="https://www.fortishealthcare.com/book-an-appointment" target="_blank" class="btn-login"><i class="fa-solid fa-user"></i> Portal</a>
+        <button class="btn-emergency" onclick="openModal('emergencyModal')"><i class="fa-solid fa-phone-volume"></i> Emergency</button>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="switchView('home')" class="mobile-link">Home</a>
+  <a onclick="scrollToElement('#departments', 'home')" class="mobile-link">Specialties</a>
+  <a onclick="scrollToElement('#testimonials', 'home')" class="mobile-link">Stories</a>
+  <a onclick="scrollToElement('#donations', 'home')" class="mobile-link">Donations</a>
+  <a onclick="switchView('about')" class="mobile-link">About Us</a>
+  <a href="https://www.fortishealthcare.com/book-an-appointment" target="_blank" class="btn-login mobile-link" style="margin-top:20px; width:200px; justify-content:center;"><i class="fa-solid fa-user"></i> Patient Login</a>
+  <button class="btn-emergency mobile-link" onclick="openModal('emergencyModal')" style="width:200px; justify-content:center;"><i class="fa-solid fa-phone-volume"></i> Emergency</button>
+</div>
+
+<div id="view-home">
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge" data-aos="fade-up">
+          <i class="fa-solid fa-shield-heart"></i>
+          <span>Trusted Healthcare Partner</span>
+        </div>
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+          Healing with<br><em>Compassion</em> & Science.
+        </h1>
+        <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">
+          Experience a patient-first environment equipped with the latest medical technology at Fortis Hospital. Dedicated to saving and enriching lives.
+        </p>
+        <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+          <button class="btn-primary" onclick="openModal('tourModal')">
+            <i class="fa-solid fa-play"></i> ICU Virtual Tour
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="find-doctor-bar" data-aos="fade-up">
+      <form onsubmit="handleFindDoctor(event)">
+        <div class="fd-grid">
+          <div class="fd-group">
+            <label>Find a Specialist</label>
+            <select id="searchSpecialty">
+              <option value="">Any Specialty</option>
+              <option value="Cardiology">Cardiologist</option>
+              <option value="Neurology">Neurologist</option>
+              <option value="Pediatrics">Pediatrician (Kids)</option>
+              <option value="Gynecology">Gynecologist (Females)</option>
+              <option value="Urology">Urologist / Andrologist (Males)</option>
+              <option value="Hematology">Hematologist</option>
+              <option value="Orthopedics">Orthopedics</option>
+            </select>
+          </div>
+          <div class="fd-group">
+            <label>Search by Disease</label>
+            <select id="searchDisease">
+              <option value="">Any Condition</option>
+              <option value="Heart Arrhythmia">Heart Arrhythmia</option>
+              <option value="Leukemia">Leukemia</option>
+              <option value="Diabetes">Diabetes</option>
+              <option value="Fever">Fever/Infection</option>
+              <option value="Fracture">Broken Bones/Joints</option>
+            </select>
+          </div>
+          <div class="fd-group">
+            <label>Doctor Name</label>
+            <input type="text" id="searchName" placeholder="e.g. Dr. Sharma">
+          </div>
+          <div class="fd-group">
+            <button type="submit" class="btn-primary" style="width: 100%; height: 46px; border-radius: 6px;">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="trust-bar">
+    <div class="trust-track">
+      <div class="trust-item"><i class="fa-solid fa-check-circle"></i> JCI Accredited Hospital</div>
+      <div class="trust-item"><i class="fa-solid fa-graduation-cap"></i> World-Class Medical Team</div>
+      <div class="trust-item"><i class="fa-solid fa-flask"></i> Advanced Clinical Research</div>
+      <div class="trust-item"><i class="fa-solid fa-clock"></i> 24/7 Emergency Care</div>
+      <div class="trust-item"><i class="fa-solid fa-check-circle"></i> JCI Accredited Hospital</div>
+      <div class="trust-item"><i class="fa-solid fa-graduation-cap"></i> World-Class Medical Team</div>
+      <div class="trust-item"><i class="fa-solid fa-flask"></i> Advanced Clinical Research</div>
+      <div class="trust-item"><i class="fa-solid fa-clock"></i> 24/7 Emergency Care</div>
+    </div>
+  </div>
+
+  <section class="departments" id="departments">
+    <div class="container">
+      <div class="section-header-centered" data-aos="fade-up">
+        <div class="section-label"><span>Areas of Expertise</span></div>
+        <h2 class="section-title">Centres of <em>Excellence</em></h2>
+        <p class="section-subtitle">Fortis Hospital is renowned nationally for its pioneering treatments. Click a department to view details.</p>
+      </div>
+      <div class="dept-grid">
+        <div class="dept-card" onclick="openDepartment('endo')" data-aos="fade-up" data-aos-delay="100">
+          <div class="dept-img-wrap"><img class="dept-img" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Endocrinology"></div>
+          <div class="dept-body">
+            <div class="dept-icon"><i class="fa-solid fa-microscope"></i></div>
+            <div class="dept-name">Endocrinology</div>
+            <div class="dept-consult">Consulted for: Diabetes, Thyroid Issues, Metabolism</div>
+            <p class="dept-desc">Unparalleled diagnostic and therapeutic solutions for metabolic and endocrine disorders affecting your daily energy and health.</p>
+            <span class="dept-link">View Department Details <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+        
+        <div class="dept-card" onclick="openDepartment('hema')" data-aos="fade-up" data-aos-delay="200">
+          <div class="dept-img-wrap"><img class="dept-img" src="https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80" alt="Oncology"></div>
+          <div class="dept-body">
+            <div class="dept-icon"><i class="fa-solid fa-ribbon"></i></div>
+            <div class="dept-name">Oncology</div>
+            <div class="dept-consult">Consulted for: Cancer Treatment, Leukemia, Tumors</div>
+            <p class="dept-desc">Pioneers in treating severe cancers with revolutionary protocols. Dedicated to comprehensive and compassionate cancer care.</p>
+            <span class="dept-link">View Department Details <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+        
+        <div class="dept-card" onclick="openDepartment('cardio')" data-aos="fade-up" data-aos-delay="300">
+          <div class="dept-img-wrap"><img class="dept-img" src="https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?auto=format&fit=crop&w=800&q=80" alt="Cardiology"></div>
+          <div class="dept-body">
+            <div class="dept-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div class="dept-name">Cardiology</div>
+            <div class="dept-consult">Consulted for: Heart Disease, Chest Pain, Arrhythmia</div>
+            <p class="dept-desc">Comprehensive heart care, from routine monitoring of blood pressure to highly advanced interventional heart surgeries.</p>
+            <span class="dept-link">View Department Details <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="dept-card" onclick="openDepartment('neuro')" data-aos="fade-up" data-aos-delay="400">
+          <div class="dept-img-wrap"><img class="dept-img" src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&q=80" alt="Neurology"></div>
+          <div class="dept-body">
+            <div class="dept-icon"><i class="fa-solid fa-brain"></i></div>
+            <div class="dept-name">Neurology</div>
+            <div class="dept-consult">Consulted for: Brain, Nerves, Migraines, Stroke</div>
+            <p class="dept-desc">Specialized care for diseases of the brain and nervous system, helping patients recover mobility and cognitive function.</p>
+            <span class="dept-link">View Department Details <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="dept-card" onclick="openDepartment('peds')" data-aos="fade-up" data-aos-delay="500">
+          <div class="dept-img-wrap"><img class="dept-img" src="https://images.unsplash.com/photo-1584516150909-c43483ee7932?auto=format&fit=crop&w=800&q=80" alt="Pediatrics"></div>
+          <div class="dept-body">
+            <div class="dept-icon"><i class="fa-solid fa-child-reaching"></i></div>
+            <div class="dept-name">Pediatrics</div>
+            <div class="dept-consult">Consulted for: Child Health, Vaccinations, Growth</div>
+            <p class="dept-desc">Gentle and expert medical care tailored specifically for infants, children, and adolescents through every stage of growth.</p>
+            <span class="dept-link">View Department Details <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="dept-card" onclick="openDepartment('ortho')" data-aos="fade-up" data-aos-delay="600">
+          <div class="dept-img-wrap"><img class="dept-img" src="https://images.unsplash.com/photo-1576089291114-1188435d64e9?auto=format&fit=crop&w=800&q=80" alt="Orthopedics"></div>
+          <div class="dept-body">
+            <div class="dept-icon"><i class="fa-solid fa-bone"></i></div>
+            <div class="dept-name">Orthopedics</div>
+            <div class="dept-consult">Consulted for: Bone Fractures, Joint Pain, Arthritis</div>
+            <p class="dept-desc">Advanced surgical and non-surgical treatments for bones, joints, ligaments, and muscle injuries to restore your movement.</p>
+            <span class="dept-link">View Department Details <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header-centered" data-aos="fade-up">
+        <div class="section-label"><span>Community Voices</span></div>
+        <h2 class="section-title">Patient <em>Stories & Experiences</em></h2>
+        <p class="section-subtitle">Real stories of resilience, hope, and healing from the people who trust us with their health.</p>
+      </div>
+
+      <div class="testimonials-grid" data-aos="fade-up" data-aos-delay="100">
+        
+        <div class="testimonial-card">
+          <i class="fa-solid fa-quote-left testimonial-quote-icon"></i>
+          <div class="testimonial-text">
+            "During my battle with Stage IV I was told several times by my doctors that I should get my affairs in order, and twice given 6-months to live. I also participated in an online forum with others who shared in the plight, and fight. I grew close to several of these people... Some of these people died, and it was absolutely heartbreaking... While I’m grateful for my good fortune and my own wife and children are glad I’m alive, I can’t help but ask sometimes, why me? It’s a very complex feeling."
+          </div>
+          <div class="testimonial-author-box">
+            <div class="testimonial-avatar">G</div>
+            <div class="testimonial-author-info">
+              <h4>Gary McCarty</h4>
+              <p>Stage IV Survivor</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <i class="fa-solid fa-quote-left testimonial-quote-icon"></i>
+          <div class="testimonial-text">
+            "It’s an odd feeling, surviving leukemia. What I remember most was being told, after two rounds of chemo, that the doctors were seeing 'no improvement'... As it turns out, I was misdiagnosed with a lymphoma! As a Hail Mary, I was sent to a specialty clinic, reexamined and properly diagnosed with Hairy Cell Leukemia. Life isn’t fair. I could have been dead 20 years ago. But instead, I got to see my daughter graduate, marry, give me a grandson. You know, the important things."
+          </div>
+          <div class="testimonial-author-box">
+            <div class="testimonial-avatar">V</div>
+            <div class="testimonial-author-info">
+              <h4>Van Knutson</h4>
+              <p>Leukemia Survivor</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <i class="fa-solid fa-quote-left testimonial-quote-icon"></i>
+          <div class="testimonial-text">
+            "It was 2009, I caught a fever. A blood test was done, the platelet count had reduced to 21000... the doctors couldn't believe I was standing. The doctor ordered immediate platelet transfusion and for that we needed atleast 5-10 potential donors... The disease had led to fluid retention in my lungs. I kept my nerves and stayed another 10 days in hospital for that to be corrected. I owe my life to the tremendous hard work and pressure handling of my parents and the medical fraternity."
+          </div>
+          <div class="testimonial-author-box">
+            <div class="testimonial-avatar">L</div>
+            <div class="testimonial-author-info">
+              <h4>Lakshay Kaushik</h4>
+              <p>Dengue Recovery</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <i class="fa-solid fa-quote-left testimonial-quote-icon"></i>
+          <div class="testimonial-text">
+            "At the time of my heart attack, I was a well-trained Firefighter/EMT. I had no family history, no evidence of heart disease... I was 26 years old. I went to the ER and knew because of my training that I was experiencing the symptoms of a clot... Three hours later, a clot lodged in my LAD (the widowmaker). I had nearly every single textbook symptom. Surviving that taught me exactly how fragile life is, even when you know all the medical warning signs."
+          </div>
+          <div class="testimonial-author-box">
+            <div class="testimonial-avatar">J</div>
+            <div class="testimonial-author-info">
+              <h4>JP Benedetto</h4>
+              <p>Cardiac Arrest Survivor</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <i class="fa-solid fa-quote-left testimonial-quote-icon"></i>
+          <div class="testimonial-text">
+            "I have chronic pancreatitis and have been hospitalized at least 5 times. The first episode, the doctor said that I was very lucky to have survived... then came type 1 diabetes. At 73 I am still determined to not go quietly into that dark night. I still have too many people to piss off before my job here is done. It changes your entire outlook on resilience."
+          </div>
+          <div class="testimonial-author-box">
+            <div class="testimonial-avatar">D</div>
+            <div class="testimonial-author-info">
+              <h4>Dan Bod</h4>
+              <p>Chronic Care Management</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <i class="fa-solid fa-quote-left testimonial-quote-icon"></i>
+          <div class="testimonial-text">
+            "I was born with severe asthma. Life threatening episodes. Not expected to make it to school age, then not expected to make it to adulthood. You learn to do what you have to do, then ignore it and go on with life. I am on a solid management plan and while I have inhalers I have to take for the rest of my life, I do pretty much whatever I want to do. I’ve done rock climbing, I surf, I’ve been swimming at competition level. Keep an eye on it, but don't let it take over your life."
+          </div>
+          <div class="testimonial-author-box">
+            <div class="testimonial-avatar">T</div>
+            <div class="testimonial-author-info">
+              <h4>Teodora Greywoolf</h4>
+              <p>Asthma Management</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="onclick-data-section">
+    <div class="container">
+      <div class="section-header-centered" data-aos="fade-up">
+        <div class="section-label"><span>Patient Resources</span></div>
+        <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
+        <p class="section-subtitle">Click on the questions below to reveal important hospital information.</p>
+      </div>
+      <div class="accordion" data-aos="fade-up" data-aos-delay="100">
+        <div class="accordion-item" onclick="this.classList.toggle('active')">
+          <div class="accordion-header">
+            What are the general visiting hours? <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="accordion-body">
+            General ward visiting hours are from 10:00 AM to 8:00 PM daily. For ICU and special care units, visiting hours are strictly limited to 2:00 PM - 4:00 PM, and only two immediate family members are permitted at a time.
+          </div>
+        </div>
+        <div class="accordion-item" onclick="this.classList.toggle('active')">
+          <div class="accordion-header">
+            Do I need to make an appointment before visiting? <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="accordion-body">
+            Yes, we highly recommend booking an appointment through our online patient portal or via phone to minimize wait times. Emergency cases do not require an appointment and are seen immediately in the ER.
+          </div>
+        </div>
+        <div class="accordion-item" onclick="this.classList.toggle('active')">
+          <div class="accordion-header">
+            What documents should I bring for my first consultation? <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="accordion-body">
+            Please bring your government-issued ID (or passport for international patients), your medical insurance card, previous medical records, scan results (X-Rays, MRIs), and a list of any current medications.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="donations" id="donations">
+    <div class="container">
+      <div class="section-header-centered" data-aos="fade-up">
+        <div class="section-label"><span>Community Support</span></div>
+        <h2 class="section-title">Hospital <em>Donations</em></h2>
+        <p class="section-subtitle">Help us support patients and families in need. Whether you wish to donate or are in need of assistance, please fill out the form below.</p>
+      </div>
+      
+      <div class="donation-card" data-aos="zoom-in" data-aos-delay="100">
+        <form onsubmit="handleDonationSubmit(event)">
+          <div class="form-group">
+            <label for="donationItem">What is the donation item?</label>
+            <select id="donationItem" class="login-input" required>
+              <option value="">-- Select an Item --</option>
+              <option value="Money">Money / Financial Aid</option>
+              <option value="Clothes">Clothes / Blankets</option>
+              <option value="Books">Books / Toys for Pediatric Ward</option>
+              <option value="Medicine">Medicine / Medical Equipment</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>What is the purpose of this request?</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="donationType" value="donate" required>
+                I'd like to donate
+              </label>
+              <label>
+                <input type="radio" name="donationType" value="need" required>
+                I need donation
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" class="login-input" placeholder="Your Name" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; height: 48px; font-size:1rem;">Submit Request</button>
+          
+          <div class="contact-highlight">
+            <p style="font-size:0.9rem; color:var(--text-mid); margin-bottom:5px;">To verify your donation or speak with our coordinator:</p>
+            <h4 style="color:var(--dark); font-size:1.2rem; letter-spacing:1px;"><i class="fa-solid fa-phone"></i> 7710246680</h4>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="metrics">
+    <div class="container">
+      <div class="metrics-grid">
+        <div class="metric-item" data-aos="zoom-in"><div class="metric-num">3<sup style="color:var(--primary)">M</sup><span class="metric-plus">+</span></div><div class="metric-label">Outpatients Annually</div></div>
+        <div class="metric-item" data-aos="zoom-in" data-aos-delay="100"><div class="metric-num">4,000<span class="metric-plus">+</span></div><div class="metric-label">Doctors</div></div>
+        <div class="metric-item" data-aos="zoom-in" data-aos-delay="200"><div class="metric-num">40<span class="metric-plus">+</span></div><div class="metric-label">Specialty Clinics</div></div>
+        <div class="metric-item" data-aos="zoom-in" data-aos-delay="300"><div class="metric-num">28<span class="metric-plus">+</span></div><div class="metric-label">Hospitals</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="view-about">
+  <div class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="container" style="position:relative; z-index:2;">
+      <div class="section-label" style="justify-content:center; margin-bottom:20px;">
+        <span style="color:var(--primary-light)">Our Heritage</span>
+      </div>
+      <h1 class="section-title" style="color:white; font-size:4rem; margin-bottom:20px;">
+        Fortis Healthcare
+      </h1>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.8); margin:0 auto; font-size:1.2rem;">
+        Pioneering medical excellence, research, and unwavering compassion across the nation.
+      </p>
+    </div>
+  </div>
+  <section class="about-content">
+    <div class="container">
+      <div class="history-grid">
+        <div data-aos="fade-right">
+          <div class="section-label"><span>A Legacy of Care</span></div>
+          <h2 class="section-title">Setting the Standard in<br><em>Modern Medicine</em></h2>
+          <p style="color:var(--text-mid); margin-bottom:24px; font-size:1.05rem;">
+            Fortis Healthcare Limited is a leading integrated healthcare delivery service provider. The healthcare verticals of the company primarily comprise hospitals, diagnostics and day care specialty facilities.
+          </p>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-year">1996</div><div class="timeline-text"><h4>Foundation</h4><p>Established to bring world-class healthcare to India.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">2001</div><div class="timeline-text"><h4>First Hospital</h4><p>First Fortis Hospital set up in Mohali.</p></div></div>
+            <div class="timeline-item"><div class="timeline-year">Present</div><div class="timeline-text"><h4>Global Presence</h4><p>Operating multiple healthcare facilities across the country.</p></div></div>
+          </div>
+        </div>
+        <div data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" alt="Hospital Building" class="history-img">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="view-department">
+  <div class="dept-detail-hero">
+    <div class="dept-detail-hero-bg" id="dd-bg" style="background-image: url('');"></div>
+    <div class="container" style="position:relative; z-index:2;">
+      <button class="btn-outline" style="border-color:rgba(255,255,255,0.4); margin-bottom: 24px; padding: 8px 16px; font-size: 0.8rem; color: white;" onclick="switchView('home'); setTimeout(()=>scrollToElement('#departments'), 100);">
+        <i class="fa-solid fa-arrow-left"></i> Back to Specialties
+      </button>
+      <div class="section-label"><span style="color:var(--primary-light)">Department Detail</span></div>
+      <h1 class="section-title" id="dd-title" style="color:white; font-size:3.5rem; margin-bottom:10px;">Department Title</h1>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.8);" id="dd-subtitle">A center of excellence at Fortis Hospital.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="dept-detail-content-wrap">
+      <div class="dept-info-grid">
+        <div class="dept-text">
+          <h3>Overview & Clinical Excellence</h3>
+          <div id="dd-overview"><p>Loading...</p></div>
+          <h3>Key Treatments & Services</h3>
+          <div id="dd-treatments"><p>Loading...</p></div>
+        </div>
+        <div class="dept-sidebar">
+          <h4><i class="fa-solid fa-circle-info"></i> Quick Facts</h4>
+          <ul id="dd-facts"><li>Loading facts...</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="gallery-section">
+  <div class="gallery-track">
+    <img src="https://images.unsplash.com/photo-1582750433449-648ed127d09e?auto=format&fit=crop&w=600&q=80" alt="Hospital Hallway">
+    <img src="https://images.unsplash.com/photo-1551076805-e1869043e560?auto=format&fit=crop&w=600&q=80" alt="Doctor Consultation">
+    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" alt="Laboratory">
+    <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ce122?auto=format&fit=crop&w=600&q=80" alt="Surgery Prep">
+    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Medical Team">
+    <img src="https://images.unsplash.com/photo-1582750433449-648ed127d09e?auto=format&fit=crop&w=600&q=80" alt="Hospital Hallway">
+    <img src="https://images.unsplash.com/photo-1551076805-e1869043e560?auto=format&fit=crop&w=600&q=80" alt="Doctor Consultation">
+    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" alt="Laboratory">
+    <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ce122?auto=format&fit=crop&w=600&q=80" alt="Surgery Prep">
+    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Medical Team">
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div>
+        <div class="footer-logo" onclick="switchView('home')">
+          <div class="nav-logo-text"><strong>Fortis Hospital</strong><span style="color:var(--primary-light)">Healthcare</span></div>
+        </div>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/fortishealth" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://twitter.com/fortis_hospital" target="_blank" class="footer-social"><i class="fa-brands fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/fortis-healthcare" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Discover Fortis</h4>
+        <ul>
+          <li><a href="https://www.fortishealthcare.com/about-us" target="_blank">About Us</a></li>
+          <li><a href="https://www.fortishealthcare.com/management" target="_blank">Management</a></li>
+          <li><a href="https://www.fortishealthcare.com/investors" target="_blank">Investors</a></li>
+          <li><a href="https://www.fortishealthcare.com/careers" target="_blank">Careers</a></li>
+          <li><a href="https://www.fortishealthcare.com/our-hospitals" target="_blank">Our Hospitals</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Medical Services</h4>
+        <ul>
+          <li><a href="https://www.fortishealthcare.com/find-a-doctor" target="_blank">Find a Doctor</a></li>
+          <li><a href="https://www.fortishealthcare.com/book-an-appointment" target="_blank">Book an Appointment</a></li>
+          <li><a href="https://www.fortishealthcare.com/specialties" target="_blank">Specialties</a></li>
+          <li><a href="https://www.fortishealthcare.com/health-checkup-packages" target="_blank">Health Checkup Packages</a></li>
+          <li><a href="https://www.fortishealthcare.com/international-patients" target="_blank">International Patients</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Key Specialties</h4>
+        <ul>
+          <li><a href="https://www.fortishealthcare.com/speciality/cardiology" target="_blank">Cardiology</a></li>
+          <li><a href="https://www.fortishealthcare.com/speciality/neurology" target="_blank">Neurology</a></li>
+          <li><a href="https://www.fortishealthcare.com/speciality/oncology" target="_blank">Oncology</a></li>
+          <li><a href="https://www.fortishealthcare.com/speciality/orthopaedics" target="_blank">Orthopedics</a></li>
+          <li><a href="https://www.fortishealthcare.com/speciality/paediatrics" target="_blank">Pediatrics</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Help & Support</h4>
+        <ul>
+          <li><a href="https://www.fortishealthcare.com/contact-us" target="_blank">Contact Us</a></li>
+          <li><a href="https://www.fortishealthcare.com/feedback" target="_blank">Feedback</a></li>
+          <li><a href="https://www.fortishealthcare.com/blog" target="_blank">Health Blogs</a></li>
+          <li><a href="https://www.fortishealthcare.com/media" target="_blank">News & Media</a></li>
+          <li><a href="https://www.fortishealthcare.com/sitemap" target="_blank">Sitemap</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Fortis Healthcare Limited. All rights reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="https://www.fortishealthcare.com/privacy-policy" target="_blank">Privacy Policy</a>
+        <a href="https://www.fortishealthcare.com/terms-of-use" target="_blank">Terms of Use</a>
+        <a href="https://www.fortishealthcare.com/disclaimer" target="_blank">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="chat-btn" onclick="toggleChat()"><i class="fa-solid fa-comment-medical"></i></button>
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <span><i class="fa-solid fa-robot"></i> Fortis Health Assistant</span>
+    <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="toggleChat()"></i>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg msg-bot">Hello! I can guide you through the website or recommend departments based on your symptoms/profile. How can I help you today?</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="Type symptoms or 'kids', 'female'..." onkeypress="if(event.key === 'Enter') sendChat()">
+    <button onclick="sendChat()"><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="tourModal">
+  <div class="modal-content" style="max-width: 700px;">
+    <button class="modal-close" onclick="closeModal('tourModal')"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-icon"><i class="fa-solid fa-bed-pulse"></i></div>
+    <h3 class="modal-title">Intensive Care Unit (ICU) Tour</h3>
+    <img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=800&q=80" alt="ICU Room" style="width:100%; border-radius: 8px; margin-bottom: 20px;">
+    <p class="modal-text">Our state-of-the-art ICU is equipped with advanced life-support monitors and staffed 24/7 by specialized intensivists.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="emergencyModal">
+  <div class="modal-content" style="border-top: 6px solid var(--alert-red);">
+    <button class="modal-close" onclick="closeModal('emergencyModal')"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-icon red"><i class="fa-solid fa-truck-medical"></i></div>
+    <h3 class="modal-title">Medical Emergency</h3>
+    <p class="modal-text">If you are experiencing a life-threatening emergency, please call the emergency services immediately.</p>
+    <a href="tel:105010" class="btn-emergency" style="justify-content:center; padding:14px; font-size:1rem; margin-bottom:12px;">Call 105010 (Fortis Emergency)</a>
+    <button class="btn-outline" style="width:100%; justify-content:center; border-color:var(--gray-200); color:var(--text-mid);" onclick="closeModal('emergencyModal')">Return to Website</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="searchResultModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('searchResultModal')"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-icon"><i class="fa-solid fa-user-doctor"></i></div>
+    <h3 class="modal-title">System Alert</h3>
+    <p class="modal-text" id="searchResultText">Processing...</p>
+    <button class="btn-primary" onclick="closeModal('searchResultModal');" style="width:100%;">Close</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
